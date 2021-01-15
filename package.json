@@ -6,6 +6,7 @@
     "@material-ui/core": "latest",
     "clsx": "latest",
     "next": "latest",
+    "next-seo": "^4.17.0",
     "prop-types": "latest",
     "react": "latest",
     "react-dom": "latest"
@@ -13,7 +14,10 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start",
-    "post-update": "echo \"codesandbox preview only, need an update\" && yarn upgrade --latest"
+    "preexport": "npm run build",
+    "export": "next export",
+    "prestart": "npm run export",
+    "deploy": "aws s3 sync out/ s3://test-static-site-funnc --acl public-read",
+    "start": "serve out"
   }
 }
